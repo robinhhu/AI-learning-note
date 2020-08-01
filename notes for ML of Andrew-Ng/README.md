@@ -22,11 +22,11 @@ For linear regression with one variable(x), or called univariate linear regressi
 ## Cost function: 
   Usage: help to figure out how to fit the best possible straight line to our data.
   h_theta (x) = theta_0 + theta_1 x is the hypothesis function in linear regression, where theta_0 and theta_1 are parameters. Different parameters lead to different hypothesis function. So the point is how to choose them.
- ![Image text](image/cost function.jpg)
+ ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/cost%20function.jpg)
  
 ## Gradient descent:
   Usage: to minimize the cost function J.  
-  ![Image text](image/gradient descent1.jpg)
+  ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20descent1.jpg)
 ### How to apply gradient descent algorithm into our cost function(linear regression model)?  
-![Image text](image/gradient descent2.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20descent2.jpg)
 The type of gradient descent we used is called “Batch” Gradient descent. It means each step of gradient descent uses all the training examples. (i.e. m in sigma)
