@@ -104,3 +104,41 @@ method to solve for theta analytically. (Another way to get theta)
 What happened: 1. Redundant features(linearly dependent) 2. Too many features(e.g. m <= n)
 Solution: 1. see if have redundant features, 2. Delete some features or use regularization
 
+## Use vectorization to speed up:
+Improve efficiency. Make numeric computation to vector computation(build-in matrix operation)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/vectorization.jpg)
+A more concrete example:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/example.png)
+
+## Classification problem:
+variable y takes on two classes 0 and 1. 0 is the negative class and 1 is the positive class. As an convention, 0 represents the absent of sth while 1 represents the existence of sth.
+Can threshold classifier output at 0.5 if apply linear regression. That is, if h_theta(x) >= 0.5, predict y=1, and else versa.
+So we need a classification algorithm called logistic regression so that h_theta(x) is greater than 0 while less than 1.
+
+### Logistic regression: 
+want 0 <= h_theta(x) <= 1 
+ ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/logistic%20regression.jpg)
+ ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/interpretation.jpg)
+
+### Decision boundary:
+Suppose predict y=1 if h_theta(x) >= 0.5 and y=0 if h_theta(x) < 0.5
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/decisionboundary.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/decisionboundary.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/non-linear%20db.jpg)
+
+### Cost function:
+We have a training set of m examples {(x^(1),y^(1)),...(x^(m),y^(m))}, x belongs to [x_0, x_1...x_n], x_0 = 1, y belongs to {0,1}, and the hypothesis function, how to choose parameters theta?
+Using cost function of linear regression can not get a convex function, so gradient descent can not be used in logistic regression. Need to come up with a new cost function that is convex so that we can develop gradient descent upon it(guarantee to find the global minimum).  
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/cost%20function%20for%20logistic%20regression.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/cost%20function%20for%20logistic%20regression2.jpg)
+
+### Advanced optimism for quicker find the theta:
+Have J(theta), and partial derivative of j(theta), we can not only use gradient descent, but also conjugate gradient, BFGS and L-BFGS. These algorithms do not need to manually pick alpha, and often faster than gradient descent. But they are more complex also.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/advancedopt.png)
+(Octave is index-one a based)
+You only need to plug in additional code to compute jVal(J(theta)) and gradient(gradient(1)...gradient(n+1)), so that they can be used in advanced build-in functions.
+
+### Multi-class classification problems(y = 1, y = 2, y = 3, y = 4)
+One-vs-all: separate one class with all another classes one by one.
+That is, h_theta^(i)(x) = P(y = i|x;theta)  for (i = 1,2,3).Train a logistic regression classifier h_theta^(i)(x) for each class i to predict the probability that y = i.
+On a new input x, to make a prediction, pick the class i that maximizes the classifiers.
