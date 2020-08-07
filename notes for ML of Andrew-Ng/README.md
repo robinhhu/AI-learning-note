@@ -1,4 +1,6 @@
-# AI learning note for Machine Learning course provided by Andrew-Ng in coursera
+# AI learning note for Machine Learning course provided by Andrew-Ng in Coursera
+## What is Machine learning?
+Machine learning is the science of getting computers to learn without being explicitly programmed.
 ## Supervised learning and unsupervised learning:
 ### Supervised learning:
   In every example in our data set, we are told what is the “correct answer”. The task of the algorithm is to give a more correct answer
@@ -30,3 +32,75 @@ For linear regression with one variable(x), or called univariate linear regressi
 ### How to apply gradient descent algorithm into our cost function(linear regression model)?  
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20descent2.jpg)
 The type of gradient descent we used is called “Batch” Gradient descent. It means each step of gradient descent uses all the training examples. (i.e. m in sigma)
+
+## Some Basic:
+### Matrix
+Matrix is a rectangular array of numbers
+Dimension of Matrix is the number of rows * number of columns(e.g. 4 * 3 matrix)
+Matrix Elements(entries of matrix): A = [1402, 191] A_ij = “i,j entry” in the i^th row, j^th column. So A_11 = 1402, A_12 = 191.
+
+#### Identity matrix: 
+Denoted I(or I_i*i). For any matrix A, A * I = I * A = A.
+
+#### Matrix inverse: 
+If A is an m * m matrix, and if it has an inverse, A * A^-1 = A^-1 * A = I. (Only square matrix has an inverse.
+Matrices don’t have an inverse are “singular” or “degenerate”
+
+#### Matrix transpose: 
+A is an m*n matrix, and let B = A^T. Then B is an n*m matrix, and B_ij = A_ji.
+
+### Vector
+Vector is a matrix with one column(e.g. y = [460; 232; 315; 178] is a 4 * 1 matrix or a 4-dimensional vector). Y_i = i^th element. Can be 1-indexed or 0-indexed.
+By convention, people use uppercase notation to refer to matrices and lowercase notation to refer to vectors.
+
+### Some algorithm:
+Matrix addition: can only add two matrices of the same size(Add together at every position)
+Scalar multiplication: multiply every position.
+Matrix * vector: to get y_i, multiply A(A is the matrix)’s i^th row with elements of vector x, and add them up.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/matrixvectormul.png)
+Matrix * matrix: the i^th column of the matrix C(result) is obtained by multiplying A(one of the matrices be multiplied with the i^th column of B(another matrix).
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/matrixmatrixmul.png)
+#### properities:
+1. A * B != B * A(not identity matrix)(not commutative)
+2. A * (B * C) = (A * B) * C(associative)
+
+## Multivariate linear regression:
+Multiple features(variables) x_1, x_2...
+
+### NOTATION:
+n = number of features
+
+Then x^(2) can be a n-dimensional matrix. That is the same as x^(2)_j, where7 j is greater than 1 and less than n.
+Our hypothesis becomes h_theta(x) = theta_0 + theta_1*x_1 + ..... theta_n * x_n
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multivariatelinearregression.png)
+
+### Gradient descent for linear regression for multiple variables:
+ ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20descent%20for%20mv.png)
+ ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20descent%20for%20mv2.png)
+#### How to make gradient descent work well:
+##### Feature scaling: 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/featurescaling.png)
+make sure features are on a similar scale(so that gradient descent can converge much more faster): Get every features into approximately in range between -1 and 1 by divide or multiply a number.
+Two ways to implement. We can divide by the max possible value. For example, x in range 0 to 1000, then divide x by 1000. Or use mean normalization. That is, replace x with (x-u)/s to make features have approximately zero mean, where u is the average value and s is the range of the value.
+
+##### “Debugging”: 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/plot.png)
+make sure gradient descent is working correctly. The cost function should decrease after every iteration.
+By plot above or automatic convergence test(declare convergence if cost function decrease by less than a threshold) to declare convergence.
+Learning rate(alpha): If is too small, then the convergence may be slow; if it is too large, the cost function may not decrease on every iteration or may not converge.
+Just try a range of value, from 1, 0.3, 0.1, 0.03, 0.01... And pick the largest possible value.
+
+## Features: 
+we can improve our features and the form of our hypothesis. E.g. can multiply two features together. Or can use polynomial regression(because our h function need not be linear) to make it quadratic, cubic or square root function.
+E.g., create additional features based on x_1, to get new feature x_2 to be x_1 square. And if you choose your features this way then feature scaling becomes very important.
+
+## Normal equation: 
+method to solve for theta analytically. (Another way to get theta)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/normalequa.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/normalequapic1.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/normalequapic2.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/normalequa2.png)
+### What if X^T*X is non-invertible(singular/degenerate)? 
+What happened: 1. Redundant features(linearly dependent) 2. Too many features(e.g. m <= n)
+Solution: 1. see if have redundant features, 2. Delete some features or use regularization
+
