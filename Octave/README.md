@@ -85,9 +85,11 @@
 * image(magic(15)), colarbar, colarmap  create a figure with a element in magic(15) a block of color that corresponds to colorbar.
 
 ### Loops:
-```for i = 1 : 10,
+```
+for i = 1 : 10,
  	v(i) = 2 ^ i;
-  end;```
+  end;
+```
 
 ```i = 1;
 while i <= 5.
