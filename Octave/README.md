@@ -23,8 +23,7 @@
 * size(A) return 1*2 matrix of the size of matrix A
 * size(A,1) return the first-dimension of of A(3 in 3*2)
 * length(A) the longest dimension of a matrix (3 in 3*2)
-
-### 
+---
 * pwd/ls/cd
 * load priceY.dat or load(‘priceY.dat’)   To load files(single quote to represent strings)
 * who    Shows the variables in the current scope(priceY is also in the list and can be used(A 47*1 matrix))
@@ -86,42 +85,43 @@
 * image(magic(15)), colarbar, colarmap  create a figure with a element in magic(15) a block of color that corresponds to colorbar.
 
 ### Loops:
-`for i = 1 : 10,
+```for i = 1 : 10,
  	v(i) = 2 ^ i;
-  end;`
+  end;```
 
-`i = 1;
+```i = 1;
 while i <= 5.
 	v(i) = 100;
 	i = i + 1;
-end;`
+end;```
 
-`if i == 6,
+```if i == 6,
 	disp(‘the value is 6’);
 elseif i == 7,
 	...;
 else
 	disp(‘...’);
-end;`
+end;```
 
-`If ....,
+```If ....,
 	....;
-end;`
+end;```
 
 ### Function:
-* Create a file named by function name(end in .m), declare function there.
+Create a file named by function name(end in .m), declare function there.
+
 E.g., in squareThisNumber.m file
-`function y = squareThisNumber(x)
-y = x^2;`
+```function y = squareThisNumber(x)
+y = x^2;```
 
-* In file, y is the value to return; x is the argument. y = x^2 is the function body. Just move to the proper root and enter squareThisNumber(5) to call function. Or use  addpath(‘C:\Users\...’) to add path in to the Octave search path so that Octave search function there.
+In file, y is the value to return; x is the argument. y = x^2 is the function body. Just move to the proper root and enter squareThisNumber(5) to call function. Or use  addpath(‘C:\Users\...’) to add path in to the Octave search path so that Octave search function there.
 
-* Octave can also create function that returns two values.
-`function [y1,y2] = squareAndCubeThisNumber(x)
+Octave can also create function that returns two values.
+```function [y1,y2] = squareAndCubeThisNumber(x)
 y1 = x^2;
-y2 = x^3;`
+y2 = x^3;```
 
 E.g. 
-[a,b] = squareAndCubeThisNumber(5);
+`[a,b] = squareAndCubeThisNumber(5);`
 And then a = 25, b = 125
 
