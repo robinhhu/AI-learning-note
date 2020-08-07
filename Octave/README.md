@@ -1,15 +1,23 @@
 ## Octave tutorial:
 ### Basic:
 % comment
+
 ~= not equal
+
 0 false
+
 1 true
+
 PS1(‘>> ‘); change the prompt
+
 Put an semi column at the end can suppress the output
+
 disp(xxxx) display sth on screen
+
 format long/short  change the format of output
-A = [1 2; 3 4; 5 6]   A is a 3*2 matrix. And the semi column says go to the next row of matrix.
-V = 1:0.1:2. Set V to a brunch of elements start form 1, increment 0.1 to 2. Result is a 11*1 matrix.
+
+* A = [1 2; 3 4; 5 6]   A is a 3*2 matrix. And the semi column says go to the next row of matrix.
+* V = 1:0.1:2. Set V to a brunch of elements start form 1, increment 0.1 to 2. Result is a 11*1 matrix.
 ones(2,3) 2*3 matrix with all positions 1.
 zeros(1,3) ...
 rand(3,3) 3*3 of all random numbers between 0 and 1
