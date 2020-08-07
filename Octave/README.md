@@ -1,9 +1,7 @@
 ## Octave tutorial:
 ### Basic:
 % comment
-
 ~= not equal
-
 0 false
 1 true
 PS1(‘>> ‘); change the prompt
