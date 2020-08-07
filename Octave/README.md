@@ -87,41 +87,51 @@
 ### Loops:
 ```
 for i = 1 : 10,
- 	v(i) = 2 ^ i;
-  end;
+	v(i) = 2 ^ i;
+end;
 ```
 
-```i = 1;
+```
+i = 1;
 while i <= 5.
 	v(i) = 100;
 	i = i + 1;
-end;```
+end;
+```
 
-```if i == 6,
+```
+if i == 6,
 	disp(‘the value is 6’);
 elseif i == 7,
 	...;
 else
 	disp(‘...’);
-end;```
+end;
+```
 
-```If ....,
+```
+If ....,
 	....;
-end;```
+end;
+```
 
 ### Function:
 Create a file named by function name(end in .m), declare function there.
 
 E.g., in squareThisNumber.m file
-```function y = squareThisNumber(x)
-y = x^2;```
+```
+function y = squareThisNumber(x)
+y = x^2;
+```
 
 In file, y is the value to return; x is the argument. y = x^2 is the function body. Just move to the proper root and enter squareThisNumber(5) to call function. Or use  addpath(‘C:\Users\...’) to add path in to the Octave search path so that Octave search function there.
 
 Octave can also create function that returns two values.
-```function [y1,y2] = squareAndCubeThisNumber(x)
+```
+function [y1,y2] = squareAndCubeThisNumber(x)
 y1 = x^2;
-y2 = x^3;```
+y2 = x^3;
+```
 
 E.g. 
 `[a,b] = squareAndCubeThisNumber(5);`
