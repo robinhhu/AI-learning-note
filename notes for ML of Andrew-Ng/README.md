@@ -149,3 +149,26 @@ You only need to plug in additional code to compute jVal(J(theta)) and gradient(
 One-vs-all: separate one class with all another classes one by one.
 
 That is, h_theta^(i)(x) = P(y = i|x;theta)  for (i = 1,2,3).Train a logistic regression classifier h_theta^(i)(x) for each class i to predict the probability that y = i. On a new input x, to make a prediction, pick the class i that maximizes the classifiers.
+
+## The problem of overfitting:
+The term “undefit” and “High bias” means the hypothesis function does not fit data set well.
+
+“Overfit” and “high variance” means we have too many features, the learned hypothesis may fit the training set very well (J(theta) almost equal to 0), but fail to generalize to new examples(predict prices on new examples)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/overfitting.png)
+
+### What can we do to address it?
+1. Reduce number of features(manually select features to keep or model selection algorithm)
+2. Regularization(keep all features, But reduce magnitude/ values of parameters theta. Work well when we have a lot of features and each contribute a little to the result)
+
+## Regularization:
+Small values for parameters theta_0,..theta_n, corresponds to “simpler” hypothesis and less prone to overfitting.
+
+### Cost function(modified):
+We can reduce the weight that some of the terms in our function carry by increasing their cost. So we can modify our cost function:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/modifiedcf.jpg)
+Regularized linear regression:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/regularizedlr.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/regularizedlr2.jpg)
+Regularized logistic regression:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/regularizedlogisticre.jpg)
+
