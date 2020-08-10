@@ -178,7 +178,7 @@ Regularized logistic regression:
 ### Neural network : group of neons 
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network.jpg)
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network.png)
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network2.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network2.png)
 
 #### Example of neural network:
 AND
