@@ -221,6 +221,6 @@ How to unroll D matrix into vectors so that they can fit into advance functions
 ### Initial value of theta:
 For gradient descent and advanced optimization, need initial value for theta. All zero do not work for neural network, while it does work for gradient descent.
 
-How to deal with? —random initialization 
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/randomini.png)
+How to deal with it? —random initialization 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/randomini.png)
 
