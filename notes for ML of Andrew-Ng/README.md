@@ -195,3 +195,32 @@ How to represent the training set?
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multiclassclassification2.png)
 Where x^(i) is image of four classes, y^(i) is the classifier that image corresponds to.
 
+## Fitting parameters in neural network:
+### NOTATION: 
+* L = total no. Of layers in network
+* S_l = no. of units(not counting bias unit) in layer l
+* K = number of output units/classes
+
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network%20cf1.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network%20cf2.png)
+
+### Algorithm to minimize cost function: back propogation
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/algorithm%20to%20minimize%20cf.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/bpa.png)
+
+### Implementation:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/ao.png)
+How to unroll D matrix into vectors so that they can fit into advance functions
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/implementationexample.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/implementationexample2.png)
+
+### Gradient checking:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gradient%20checking.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gc%20note.png)
+
+### Initial value of theta:
+For gradient descent and advanced optimization, need initial value for theta. All zero do not work for neural network, while it does work for gradient descent.
+
+How to deal with? —random initialization 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/randomini.png)
+
