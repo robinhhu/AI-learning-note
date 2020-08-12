@@ -172,3 +172,26 @@ Regularized linear regression:
 Regularized logistic regression:
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/regularizedlogisticre.jpg)
 
+## Neural Network: Algorithm that try to mimic the brain.
+### Neural model: logistic unit
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20model.jpg)
+### Neural network : group of neons 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/neural%20network2.png)
+
+#### Example of neural network:
+AND
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/and.png)
+OR
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/or.png)
+#### Complex non-linear hypothesis:
+XNOR
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/xnor.png)
+
+### Multi-class classification:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multiclassclassification.png)
+How to represent the training set? 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multiclassclassification2.png)
+Where x^(i) is image of four classes, y^(i) is the classifier that image corresponds to.
+
