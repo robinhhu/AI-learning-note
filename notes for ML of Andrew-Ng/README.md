@@ -41,7 +41,7 @@ The type of gradient descent we used is called “Batch” Gradient descent. It 
 
 ## Some Basic:
 ### Matrix
-Matrix is a rectangular array of numbers. Dimension of Matrix is the number of rows * number of columns(e.g. 4 * 3 matrix)
+Matrix is a rectangular array of numbers. The dimension of Matrix is the number of rows * number of columns(e.g. 4 * 3 matrix)
 
 Matrix Elements(entries of matrix): A = [1402, 191] A_ij = “i,j entry” in the i^th row, j^th column. So A_11 = 1402, A_12 = 191.
 
@@ -52,7 +52,7 @@ Denoted I(or I_i*i). For any matrix A, A * I = I * A = A.
 If A is an m * m matrix, and if it has an inverse, A * A^-1 = A^-1 * A = I. (Only square matrix has an inverse. Matrices don’t have an inverse are “singular” or “degenerate”
 
 #### Matrix transpose: 
-A is an m*n matrix, and let B = A^T. Then B is an n*m matrix, and B_ij = A_ji.
+A is an m*n matrix, and let B = A^T. Then B is an n*m matrix and B_ij = A_ji.
 
 ### Vector
 Vector is a matrix with one column(e.g. y = [460; 232; 315; 178] is a 4 * 1 matrix or a 4-dimensional vector). Y_i = i^th element. Can be 1-indexed or 0-indexed. By convention, people use uppercase notation to refer to matrices and lowercase notation to refer to vectors.
@@ -74,7 +74,7 @@ Multiple features(variables) x_1, x_2...
 ### NOTATION:
 n = number of features
 
-Then x^(2) can be a n-dimensional matrix. That is the same as x^(2)_j, where7 j is greater than 1 and less than n.
+Then x^(2) can be an n-dimensional matrix. That is the same as x^(2)_j, where7 j is greater than 1 and less than n.
 
 Our hypothesis becomes h_theta(x) = theta_0 + theta_1*x_1 + ..... theta_n * x_n
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multivariatelinearregression.png)
@@ -87,7 +87,7 @@ Our hypothesis becomes h_theta(x) = theta_0 + theta_1*x_1 + ..... theta_n * x_n
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/featurescaling.png)
 make sure features are on a similar scale(so that gradient descent can converge much more faster): Get every features into approximately in range between -1 and 1 by divide or multiply a number.
 
-There are two ways to implement. We can divide by the max possible value. For example, x in range 0 to 1000, then divide x by 1000. Or use mean normalization. That is, replace x with (x-u)/s to make features have approximately zero mean, where u is the average value and s is the range of the value.
+There are two ways to implement it. We can divide by the max possible value. For example, x in range 0 to 1000, then divide x by 1000. Or use mean normalization. That is, replace x with (x-u)/s to make features have approximately zero mean, where u is the average value and s is the range of the value.
 
 ##### “Debugging”: 
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/plot.png)
@@ -223,4 +223,72 @@ For gradient descent and advanced optimization, need initial value for theta. Al
 
 How to deal with it? —random initialization 
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/randomini.png)
+
+### Summary of neural network learning algorithm:
+1. Pick a network architecture(how many hidden layers(usually the more the better), how many units in each layer(usually the same in every hidden unit, decided by feature pattern))
+2. Training a neural network(randomly initialize weights, implement forward propagation to get h_theta(X^(i)) for any X^(i), compute cost function, backdrop to compute partial derivatives, use gradient checking(then disable gradient checking code), finally use gradient descent or advanced optimization method to get theta)
+
+## Evaluating a learning algorithm:
+### Decide what to do next:
+Suppose you have implemented regularized linear regression to predict housing prices. however, when you test your hypothesis on a new set of houses, you find that it makes unacceptably large errors in its prediction. What should you try next?
+* get more training examples
+* Try smaller sets of features
+* Try getting additional features
+* Try adding polynomial features(X_1^2, X_2^2, X_1*X_2, etc)
+* Try decreasing lambda
+* Try increasing lambda
+
+Rather than try above methods randomly, we have simple way to decide in what way we spend our time pursuing.
+
+Introduce how to evaluate learning algorithm and machine learning diagnostic(a test that can run to gain insight what is/isn’t working with a learning algorithm, and gain guidance as to how best to improve its performance)(diagnostics can take time to implement, but doing so can save a lot of time afterwards)
+
+### Evaluate hypothesis:
+#### How to tell if a hypothesis is overfitting? 
+Split our dataset into two portions. One for training set(70%), another for test set(30%), where data should be randomly shuffled before training.
+Training procedure:
+1. Learn parameter theta from training data(minimizing training error J(theta))
+2. Compute test set error. Can compute J_test(theta) as usual for linear regression, or use misclassification error(0/1 misclassification error) for logistic regression
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/testerror.jpg)
+
+### Model selection(How to choose polynomial terms, lambda, etc):
+Once parameters theta_0, theta_1.. theta_4 were to fit to some set of data(training set), the error of the parameters as measured on that data(J_theta) is likely to be lower than the actual generalization error.
+So the J_test(theta) we got from our test set may just fit our test set and can not be generalized well.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/twosets.png)
+So instead we are going to split our data set into 3 pieces. 60% for training set, 20% for cross validation set, 20% for test set.
+Similarly, we compute training error, cross validation error and test error for each set.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/threesets.png)
+We can then get the generalization error for our model.
+
+### Diagnose problems(Bias vs Variance(under fitting vs overfitting)):
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/errorplots.png)
+So how to figure out whether it is a bias or variance?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/diagnose.png)
+
+### How regularization affect bias/variance?
+Large lambda(lambda = 100000), all theta = 0, high bias(underfit)
+Small lambda(lambda = 0), high variance(overfit)
+Intermediate lambda, “just right”
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/trainlambda.png)
+Define J without using regularization, then select lambda
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/selectlambda.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/ftolambda.png)
+The procedure:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/procedure.png)
+
+### Learning curve: figure out whether your hypothesis suffer from bias or variance or both
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/learning%20curve.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/lchb.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/lchv.png)
+
+### What to do?
+* get more training examples.         ——fix high variance problem
+* Try smaller sets of features.          ——fix high variance problem
+* Try getting additional features.        ——fix high bias problem
+* Try adding polynomial features(X_1^2, X_2^2, X_1*X_2, etc).       ——fix high bias
+* Try decreasing lambda.      ——fix high bias
+* Try increasing lambda.       ——fix high variance
+
+
+### What about problems in neural network?
+Using single hidden layer is a reasonable default, but if want to choose the number of hidden layers, try training neural network with various hidden layers and see which performs best on the cross-validation sets
 
