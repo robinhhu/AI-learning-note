@@ -266,7 +266,9 @@ So how to figure out whether it is a bias or variance?
 
 ### How regularization affect bias/variance?
 Large lambda(lambda = 100000), all theta = 0, high bias(underfit)
+
 Small lambda(lambda = 0), high variance(overfit)
+
 Intermediate lambda, “just right”
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/trainlambda.png)
 Define J without using regularization, then select lambda
@@ -292,3 +294,36 @@ The procedure:
 ### What about problems in neural network?
 Using single hidden layer is a reasonable default, but if want to choose the number of hidden layers, try training neural network with various hidden layers and see which performs best on the cross-validation sets
 
+## System design:
+First example:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/spamexample.png)
+And we have a lot thing to do, here are some examples
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/spamoptions.png)
+The question is how to choose from those options that can save your most of the time
+
+### Recommended approach:
+	•	start with a simple algorithm that you can implement quickly. Implement it and test  it on your cross-validation data.
+	•	Plot learning curves to decide if more data, more features, etc. are likely to help
+	•	ERROR ANALYSIS: Manually examine the examples(in cross validation set) that your algorithm made error on. See if you spot any systematic trend in what type of examples it is making errors on(Know current shortcomings quickly). For example, categorize misclassified emails based on what type of email it is(pay particular attention to those categories that misclassified frequency. Add features to them to help) and what cues you think would have helped the algorithm classify correctly(For example, after manually examination, most of the misclassified emails contain deliberate misspellings. So misspellings is something that you should try a lot of time to write algorithm to detect).
+
+### Evaluate your algorithm using numerical evaluation:
+Error analysis may not be helpful for deciding if this is likely to improve performance. Only solution is to try it and see if it works.
+
+Need numerical evaluation(e.g., cross validation error) of algorithm’s performance with and without the solution.
+
+### One exception: skewed classes
+Where the ratio of positive to negative examples is very close to one of the two extremes(The number of positive example much much smaller than negative or vice versa). That is the case called skewed classes. We have a lot more examples from one class than the other class. So that a function always output 1 or 0 can actually do better than our algorithm.
+
+And that’s the problem for using classification error or classification accuracy as our evaluation matrix. So we need another evaluation matrix: precision recall.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/precisionrecall.png)
+In this case when we have algorithm y=0, the recall is 0 because the true positive is always 0.
+
+### Trade off between precision and recall:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/tradeoff.png)
+By switching between threshold we can actually get different precision and recall.
+So how do we decide which algorithm is the best?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/Fscore.png)
+Try different threshold and pick the one which give you the biggest f score on your cross validation set.
+
+### How many data?
+Assume feature x belongs to R^n+1 has sufficient information to predict y accurately, and we use a learning algorithm with many parameters, then J_train^(theta) will be small(low bias). And if we use a very large training set(unlikely to overfit)(low variance), J_train(theta) will approximately equal to J_test(theta). So J_test(theta) will also be small.
