@@ -302,9 +302,9 @@ And we have a lot thing to do, here are some examples
 The question is how to choose from those options that can save your most of the time
 
 ### Recommended approach:
-• start with a simple algorithm that you can implement quickly. Implement it and test  it on your cross-validation data.
-• Plot learning curves to decide if more data, more features, etc. are likely to help
-• ERROR ANALYSIS: Manually examine the examples(in cross validation set) that your algorithm made error on. See if you spot any systematic trend in what type of examples it is making errors on(Know current shortcomings quickly). For example, categorize misclassified emails based on what type of email it is(pay particular attention to those categories that misclassified frequency. Add features to them to help) and what cues you think would have helped the algorithm classify correctly(For example, after manually examination, most of the misclassified emails contain deliberate misspellings. So misspellings is something that you should try a lot of time to write algorithm to detect).
+* start with a simple algorithm that you can implement quickly. Implement it and test  it on your cross-validation data.
+* Plot learning curves to decide if more data, more features, etc. are likely to help
+* ERROR ANALYSIS: Manually examine the examples(in cross validation set) that your algorithm made error on. See if you spot any systematic trend in what type of examples it is making errors on(Know current shortcomings quickly). For example, categorize misclassified emails based on what type of email it is(pay particular attention to those categories that misclassified frequency. Add features to them to help) and what cues you think would have helped the algorithm classify correctly(For example, after manually examination, most of the misclassified emails contain deliberate misspellings. So misspellings is something that you should try a lot of time to write algorithm to detect).
 
 ### Evaluate your algorithm using numerical evaluation:
 Error analysis may not be helpful for deciding if this is likely to improve performance. Only solution is to try it and see if it works.
