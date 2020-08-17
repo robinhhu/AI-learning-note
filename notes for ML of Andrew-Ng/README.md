@@ -318,12 +318,62 @@ And that’s the problem for using classification error or classification accura
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/precisionrecall.png)
 In this case when we have algorithm y=0, the recall is 0 because the true positive is always 0.
 
-### Trade off between precision and recall:
+### Trade-off between precision and recall:
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/tradeoff.png)
 By switching between threshold we can actually get different precision and recall.
 So how do we decide which algorithm is the best?
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/Fscore.png)
-Try different threshold and pick the one which give you the biggest f score on your cross validation set.
+Try different threshold and pick the one which gives you the biggest f score on your cross-validation set.
 
 ### How many data?
 Assume feature x belongs to R^n+1 has sufficient information to predict y accurately, and we use a learning algorithm with many parameters, then J_train^(theta) will be small(low bias). And if we use a very large training set(unlikely to overfit)(low variance), J_train(theta) will approximately equal to J_test(theta). So J_test(theta) will also be small.
+
+## Support vector machine: Alternative view of logistic regression
+The cost example above is the amount each example contribute the final cost(The cost for each set).
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/alternativeforlogisticregre.png)
+We replace cost function at y = 1 and y = 0 with cost_1(z) and cost_0(z).
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/svmcostfun.png)
+We get rid of constant 1/m, and replace lambda with C to get the cost function for SVM. So minimize the function at the bottom can get the parameters learned by SVM.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/whatweget.png)
+We can get theta after implementing the cost function at top. And rather than output the probability like logistic regression, our hypothesis is to simply output 1 if theta^transpose*X is greater or equal to 0, and 0 otherwise.
+
+### Large margin intuition:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/largemargin.png)
+We want more than Theta^transpose*X greater than 0, we want it to be greater than 1 so that the output result is safe.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/lm.png)
+SVM always gives us larger margin thus greater solutions. That is to separate the positive and negative example with as big a margin as possible. But it is also sensitive to any outliners(And that’s the case when C is very large(lambda very small). If C is set to value smaller, the algorithm can ignore few outliners).
+
+Kernels:
+How to define features?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel1.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel2.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel3.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel4.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel5.png)
+how to choose landmark?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel6.png)
+How to combine kernel with SVM?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel7.png)
+Don’t need to worry about implementation details at the bottom.
+
+How to choose C? The bias and variance trade-off:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernel8.png)
+
+Using SVM:
+Use software package(e.g. liblinear,libsvm...) to solve for parameters theta.
+
+Need to specify:
+* Choice of parameter C
+* Choice of kernel(similarly function)(E.g. No kernel, “linear kernel”, predict “y=1” if theta^transpose*X >= 0(when n large, m small))Or Gaussian kernel, also need to choose sigma square(n small, m large).
+
+There are something to do if choose to use Gaussian kernel
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kernelfun.png)
+Can also choose other kernels. But not all are valid.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/choicesforkernel.png)
+
+Multi-class classification:
+Many SVM package already have build-in multi-class classification functionality. Otherwise, use one-vs-all methods(Train K SVMs, one to distinguish y = i from the rest, for i = 1,2, ..., K), get Theta^(1),... pick class i with largest (theta(i)^transpose)*X
+
+Logistic regression vs. SVMs:
+Logistic regression and SVM without kernel is similar. SVM is powerful with kernels.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/comparison.png)
