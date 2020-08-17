@@ -383,7 +383,7 @@ We are given data that have no labels associate. Training set {X^(1),X^(2)...}. 
 
 ## Clustering:
 ### K-means algorithm:
-￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kmeans.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kmeans.jpg)
 An example for non-separated clusters:
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/non-separated.png)
 
