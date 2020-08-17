@@ -382,7 +382,7 @@ Logistic regression and SVM without kernel is similar. SVM is powerful with kern
 We are given data that have no labels associate. Training set {X^(1),X^(2)...}. we just ask the algorithm find some structure in the data for us.
 
 ## Clustering:
-### K-means algorithm: ￼
+### K-means algorithm:
 ￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kmeans.jpg)
 An example for non-separated clusters:
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/non-separated.png)
@@ -391,7 +391,7 @@ An example for non-separated clusters:
 *	help to debug the learning algorithm and make sure k-means is running correctly
 *	Help k-means find better costs and avoid the local Ultima
 
-Just a reminder that 
+Just a reminder that
 ￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/reminder.jpg)
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/k-meansoptimization.png)
 
