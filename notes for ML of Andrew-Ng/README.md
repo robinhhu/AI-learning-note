@@ -392,7 +392,7 @@ An example for non-separated clusters:
 *	Help k-means find better costs and avoid the local Ultima
 
 Just a reminder that
-￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/reminder.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/reminder.jpg)
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/k-meansoptimization.png)
 
 #### Random initialization:
