@@ -377,3 +377,92 @@ Many SVM package already have build-in multi-class classification functionality.
 Logistic regression vs. SVMs:
 Logistic regression and SVM without kernel is similar. SVM is powerful with kernels.
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/comparison.png)
+
+# Unsupervised learning:
+We are given data that have no labels associate. Training set {X^(1),X^(2)...}. we just ask the algorithm find some structure in the data for us.
+
+## Clustering:
+### K-means algorithm: ￼
+￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kmeans.jpg)
+An example for non-separated clusters:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/non-separated.png)
+
+#### Optimization objective:
+*	help to debug the learning algorithm and make sure k-means is running correctly
+*	Help k-means find better costs and avoid the local Ultima
+
+Just a reminder that 
+￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/reminder.jpg)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/k-meansoptimization.png)
+
+#### Random initialization:
+1.	Should have K < m
+2.	Randomly pick K training examples
+3.	Set mu_1,mu_2,...mu_k equal to these K examples
+
+Random initialization can also be dangerous
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/dangerouslocal.png)
+Solution: try multiple random initialization
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/manttimes.png)
+It works when k is not large. For the case where k >= 10, it is likely that you can get decent solution for the first time
+
+#### Choose the number of clusters:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/elbow.png)
+The picture on the left is ideal, but most of the time we get ambiguous picture on the right. So not a good choice. 
+The later purpose:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/laterpurpose.png)
+
+## Another type of unsupervised learning problem: dimensionality reduction
+### Motivation:
+1.	Data compression(save space, speed up learning algorithm)
+Reduce data from 2D to 1D: if we have data that have two dimensions, one in cm and another in inches. Since we can easily change from inches to cm, the data is highly redundant and we can reduce the data into 1D. What we do is to draw a line and project data into the line as follows:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/datacompression.png)
+Another example from 3D to 2D:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/datacompression2.png)
+When all of data lies roughly on the plane like so, we project data into a plane.
+2.	Data Visualization
+given huge number of data, can we examine data in a better way?
+———reduce data from 50D to 2D, and then we can plot dot on figure(summarize 50 features and plot the figure in 2D. But it doesn’t astride a physical meaning to these new features. So it is up to us to figure out, roughly what these features means)
+
+### Algorithm for dimensionality reduction: Principle component analysis
+fine the line or plane to project data on
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca.png)
+PCA is not linear regression:
+Linear regression is to find a line that fit the data. And we evaluate using vertical distance between data and output. Where in contrast, in PCA we try to minimize the shortest distance between data and our line. 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca2.png)
+
+#### How to implement:
+1.	Data preprocessing(feature scaling/mean normalization
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/datapre.png)
+2.	What we want PCA to compute is u^(1), u^(2) and vector z
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pcapre.png)
+3.	The procedure
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca3.png)
+We first compute covariance matrix, stores it to sigma(n*n), and then use svd function to compute evigenvectors. The output U is also a n*n matrix, and to reduce to k dimensions, we only need to pick the first k vectors from U output.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca4.png)
+What we want is z.
+
+To summarize:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/summary.png)
+
+#### How to get back?
+From low dimensions to higher. For example, we get 1D value and now we want approximation to original 2D value.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/inverse.png)
+
+#### Choosing k:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/choosingk.png)
+Notice that when we compress from x(R^n) to z(R^k), where k < n, some data lost. So when we change from z(R^k) to x_approx(R^n), we only get back part of the data that based on the plane. It is slightly different with the previous x where we have some extra information above/below the plane.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/simplerway.png)
+Don’t need to call on svd function again and again. Only call svd once and increase k again and again until the smallest value of k for which 99%(E.g.) of variance retained.
+
+#### PCA application:
+1.	Supervised learning speedup(choose k by % of variance retained）
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/speedup.png)
+2.	Reduce memory/disk needed to store data(choose k by % of variance retained)
+3.	visualization（k = 2 or k = 3)
+4.	It is bad use of PCA to prevent overfitting.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/baduse.png)
+Since when reduce dimensions, PCA may lose some valuable information while regularization process also keeps an eye on y.
+5.	Another misuse
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/baduse2.png)
+Only when implement the raw data and found too slower/memory requirement too high. Then implement PCA.
