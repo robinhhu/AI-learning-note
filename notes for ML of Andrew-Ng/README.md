@@ -385,7 +385,7 @@ We are given data that have no labels associate. Training set {X^(1),X^(2)...}. 
 ### K-means algorithm: ￼
 ￼![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/kmeans.jpg)
 An example for non-separated clusters:
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/non-separated.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/non-separated.png)
 
 #### Optimization objective:
 *	help to debug the learning algorithm and make sure k-means is running correctly
@@ -403,7 +403,7 @@ Just a reminder that
 Random initialization can also be dangerous
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/dangerouslocal.png)
 Solution: try multiple random initialization
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/manttimes.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/manytimes.png)
 It works when k is not large. For the case where k >= 10, it is likely that you can get decent solution for the first time
 
 #### Choose the number of clusters:
@@ -432,11 +432,11 @@ Linear regression is to find a line that fit the data. And we evaluate using ver
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca2.png)
 
 #### How to implement:
-1.	Data preprocessing(feature scaling/mean normalization
+1. Data preprocessing(feature scaling/mean normalization
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/datapre.png)
-2.	What we want PCA to compute is u^(1), u^(2) and vector z
+2. What we want PCA to compute is u^(1), u^(2) and vector z
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pcapre.png)
-3.	The procedure
+3. The procedure
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca3.png)
 We first compute covariance matrix, stores it to sigma(n*n), and then use svd function to compute evigenvectors. The output U is also a n*n matrix, and to reduce to k dimensions, we only need to pick the first k vectors from U output.
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pca4.png)
