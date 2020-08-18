@@ -393,7 +393,7 @@ An example for non-separated clusters:
 
 Just a reminder that
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/reminder.jpg)
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/k-meansoptimization.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/k-meansoptimization.png)
 
 #### Random initialization:
 1.	Should have K < m
