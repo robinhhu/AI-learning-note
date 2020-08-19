@@ -466,3 +466,123 @@ Since when reduce dimensions, PCA may lose some valuable information while regul
 5.	Another misuse
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/baduse2.png)
 Only when implement the raw data and found too slower/memory requirement too high. Then implement PCA.
+
+## Unsupervised learning: Anomaly Detection:
+### Motivation: Examine aircraft engine.
+We examine aircraft engine features like heat generated and vibration intensity based on a dataset. And then when we get a new engine X_test, we can decide whether it needs further examination.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/examineaircraft.png)
+In detail, we have a serious of features given by normal aircrafts and we want to estimate whether a new engine is anomalous based on algorithm. That is, for example, given a unlabeled training set, we are going to build a model for p(x)(probability of x where x are features). Having build the model we can say that if p(X_test) < epsilon, then we flag this as anomaly.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/anomaly.png)
+An application: detect unusual users, manufacturing use such as examine aircraft and monitoring computer in a data center.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/application.png)
+
+### Gaussian distribution(normal distribution):
+the standard deviation decides the width of the figure.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/normaldis.png)
+Examples of Gaussian distribution:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/disexample.png)
+The shaded area is always integrated to 1. So when the width of the distribution decrease, its height will increase.
+When given dataset(x^(1),x^(2)...,x^(m)) x^(i) belongs to R, how to estimate parameters mu and sigma square?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/estimate.png)
+
+Apply Normal distribution to anomaly detection algorithm:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/densityestimation.jpg)
+
+### Anomaly detection algorithm:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/ada.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/examplepx.png)
+
+### Evaluate the anomaly detection algorithm:
+Based on evaluation to evaluate and decide whether to use some feature or the value of epsilon.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/evaluation.png)
+Specific example:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/evaluationexample.png)
+How to split labeled and unlabeled examples(6000 training set are all unlabeled). We use 60% 20% 20% for good engines, and put anomalous just in the cv set and test set.
+How to implement?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/implementdetail.png)
+We treat all training set as normal. And since the data is very skewed(anomaly is rare), we need evaluation metrics.
+
+#### Anomaly detection vs. supervised learning
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/avss.png)
+Key difference is that we have a small number of positive examples and it is hard for supervised algorithm to learn much from such limited examples.
+
+### Choosing what features to use?
+1. Use hist(x) to plot histogram(hist(x,50) for 50 bins).
+And to make algorithm work better, we change some non-Gaussian features Gaussian(even thought they also work well when they are not Gaussian).
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/non-g.png)
+xNew = x.^0.5 can be a new feature.
+2. Error analysis
+If we have an anomalous example buried among normal examples, we can manually examine that example thus come up with another feature x_2
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/errorana.png)
+3. Choose features that might take on unusual large or small values in the event if an anomaly.
+E.g. an anomaly can cased by high CPU load and network traffic(normally these are linearly related), we can create a feature CPU load/net work traffic that corresponds to unusual combination of values of features.
+
+### Modified version:
+Previous algorithm fails to detect that CPU and memory have sort of linear relation. The green data indicated there have neither too low CPU load nor high memory use even though it is actually an anomaly. So how can we fix the problem that the algorithm treat examples in the same circle as equal possibility?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/problemforad.png)
+Multivariate Gaussian distribution:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/multivariategd.png)
+Some examples:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/vary.png)
+We can change mu to alter the center of the image and change sigma to alter the shape. Larger sigma(1,1) makes x_1 smoother, larger sigma(2,2) makes x_2 smoother. It is also worth noticing that change the diagnose(sigma(1,2) and sigma(2,1)) to positive value makes x_1 and x_2 positively related(y = x) while change them to negative makes them negatively related(y = -x).
+#### Apply multivariate Gaussian distribution:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/details.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/details2.png)
+
+### Comparison between origin model and multivariate model:
+The main difference is that the original model is always symmetric while the multivariate one has some angle.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/comparisonmodels.png)
+Advantage/disadvantage:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/commodels.png)
+Normally we use original model, even manually create unusual features. However when m is very large we may also consider multivariate Gaussian. When the matrix is singular thus non-invertible, check redundant data.
+
+## Recommender system: application of machine learning
+A few settings that you can have algorithm just to learn what feature to us
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/movies.png)
+We want an algorithm that automatically fill in missing values for us so that we can predict what movies the user has not seen yet and recommend it to users.
+
+### First approach: content based recommendations
+Assume we have features e.g. how romantic is this movies, how much action is in this movie? Etc.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/cbr.png)
+Apply a different copy of essentially linear regression for each user. Each user have a different linear function.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/problemformulation.png)
+Note that for the equation at the bottom, the constant 1/m is canceled since it has nothing to do with the result.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/cbroptimization.png)
+Add extra summation for all users.
+
+And the gradient descent:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/gd.png)
+
+### Second approach: collaborative filtering
+The case where we don’t know the content.
+
+It has the property of feature learning, that is, it starts to learn for itself what features to use
+
+So assume that we can get to users and each user tells us what is the value of theta_j for us. If we get the parameter theta of each user, we can get values x_1 and x_2 for each movie.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/thetatox.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/algorithm.png)
+
+Theta and x just like egg and chicken, we want chicken to lie eggs and eggs to incubate chickens. One way to optimize is to guess an initial value for theta first(collaborative filtering algorithm).
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/collaborative.png)
+It is only possible when each user rates multiple movies and each movie is rated by multiple users.
+
+### Collaborative filtering algorithm:
+Actually there is no need to do iterations, we can compute theta and x simultaneously by combining optimization objective together.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/collaborative2.png)
+And we get rid of X_0 and theta_0 because the algorithm can get 1 by themselves if needed.
+In summary, the procedure of collaborative filtering algorithm is as followed:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/collaborative3.png)
+Notice that we already get rid of x_0, so there is no need to break out a special case for k = 0 in gradient descent.
+
+#### Vectorization implementation(low rank matrix factorization):
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/lrmf.png)
+
+### Application: find related movies:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/recommend.png)
+
+### Technique: Mean normalization:
+An unusual example:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/norate.png)
+Mean normalization fix the problem: 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/meannormalization.png)
+The idea is that if an user who hasn’t  rate anything, we will assign it a mean value of that movie.
