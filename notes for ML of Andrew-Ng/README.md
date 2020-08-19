@@ -533,7 +533,7 @@ We can change mu to alter the center of the image and change sigma to alter the 
 The main difference is that the original model is always symmetric while the multivariate one has some angle.
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/comparisonmodels.png)
 Advantage/disadvantage:
-![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/commodels.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/commondels.png)
 Normally we use original model, even manually create unusual features. However when m is very large we may also consider multivariate Gaussian. When the matrix is singular thus non-invertible, check redundant data.
 
 ## Recommender system: application of machine learning
