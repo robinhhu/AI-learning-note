@@ -586,3 +586,44 @@ An unusual example:
 Mean normalization fix the problem: 
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/meannormalization.png)
 The idea is that if an user who hasn’t  rate anything, we will assign it a mean value of that movie.
+
+## Large scale machine leraning:
+Come with problem: since there are so many data, the computational cost for a single step will be large.
+
+Actually, we can first implement with 1000examples and plot the learning curve. If we find the learning curve correspond to a high variance algorithm, then we can more confident to apply large dataset because we are sure that a greater dataset will improve performance.
+
+### So how to deal with big dataset?
+1. We take linear regression with gradient descent as example. The gradient descent we use is called batch gradient descent. It indicates that we are looking all of the training examples at a time.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/sgd.png)
+Rather than waiting for the summation of many data, stochastic gradient descent starts to modify theta from the first record. Random shuffle is important here since it speed up the process of converging.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/sgd2.png)
+And that’s how its process looks like. It will wonder around in some region close to the global minimum,rather than just go to the global minimum and stay there. One thing worth noticing is that depend on the scale of our dataset, we may repeat through the loop 1 to 10 times.
+1. how to make sure it converges?
+We used to plot cost function as a function of the number of iterations
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/convergecheck.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/convergecheck2.png)
+Average over more examples can help to make clear the trend.
+2. How to choose value alpha?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/decreasea.png)
+You can do that it turns of convergence better, however it is not recommended because you also need to deal with constant1 and constant2.
+
+2. Another idea: mini-batch gradient descent
+Instead of having m or 1 example in each iteration, we have something in between.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/mini.png)
+A more concrete example:
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/mini2.png)
+It’s also much faster than gradient descent because we start to make some progress after examining 10 examples. Also, it runs faster than stochastic gradient descent because it allows parallel computation among vectors.
+
+## Online learning: continuous stream of data coming in
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/onlinelearning.png)
+Changing of economy, users start to become more price sensitive. Online learning algorithm can adapt to changing user preference
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/onlinelearning2.png)
+Another example
+
+## Large scale machine learning: Map-reduce
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/map-reduce.png)
+Can use map-reduce whenever learning algorithm can be expressed as computing sums of functions over the training set.
+
+Can also apply to single computer with different CPU. And its even better without the need to consider network latency. 
+
+In general, it is good idea to paralyzed implementation using map-reduce. However sometimes choosing the right library with appropriate vectorization can also help.
