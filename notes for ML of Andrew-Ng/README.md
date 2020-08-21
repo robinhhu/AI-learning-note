@@ -598,12 +598,12 @@ Actually, we can first implement with 1000examples and plot the learning curve. 
 Rather than waiting for the summation of many data, stochastic gradient descent starts to modify theta from the first record. Random shuffle is important here since it speed up the process of converging.
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/sgd2.png)
 And that’s how its process looks like. It will wonder around in some region close to the global minimum,rather than just go to the global minimum and stay there. One thing worth noticing is that depend on the scale of our dataset, we may repeat through the loop 1 to 10 times.
-1. how to make sure it converges?
+* how to make sure it converges?
 We used to plot cost function as a function of the number of iterations
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/convergecheck.png)
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/convergecheck2.png)
 Average over more examples can help to make clear the trend.
-2. How to choose value alpha?
+* How to choose value alpha?
 ![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/decreasea.png)
 You can do that it turns of convergence better, however it is not recommended because you also need to deal with constant1 and constant2.
 
