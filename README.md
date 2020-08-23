@@ -88,5 +88,5 @@ The first part is the learning note for machine learning on coursera. The learni
  - Text detection pipeline
 15. Artificial data synthesis(get huge dataset)
 16. Ceiling analysis(how to improve)
-
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/finalsummary.png)
 
