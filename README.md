@@ -7,15 +7,15 @@ The first part is the learning note for machine learning on coursera. The learni
 1. What is machine learning?
 2. Supervised learning and unsupervised learning
 3. Supervised learning(linear regression)
- 1. Cost function
- 2. Gradient descent(way to get theta)
- 3. Apply gradient descent to cost function
- 4. Linear algebra bases
- 5. Gradient descent for multiple variables(theta)
- 6. How to make gradient descent works well(feature scaling and learning rate)
- 7. How to get features
- 8. Normal equation(another way to get theta)
- 9. Vectorization
+  1. Cost function
+  2. Gradient descent(way to get theta)
+  3. Apply gradient descent to cost function
+  4. Linear algebra bases
+  5. Gradient descent for multiple variables(theta)
+  6. How to make gradient descent works well(feature scaling and learning rate)
+  7. How to get features
+  8. Normal equation(another way to get theta)
+  9. Vectorization
 4. Supervised learning(classification problem)
  1. Logistic regression
  2. Decision boundary
