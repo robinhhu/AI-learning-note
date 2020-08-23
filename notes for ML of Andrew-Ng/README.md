@@ -627,3 +627,46 @@ Can use map-reduce whenever learning algorithm can be expressed as computing sum
 Can also apply to single computer with different CPU. And its even better without the need to consider network latency. 
 
 In general, it is good idea to paralyzed implementation using map-reduce. However sometimes choosing the right library with appropriate vectorization can also help.
+
+## Machine learning application example: Photo OCR
+### Machine learning pipeline
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pipeline.png)
+So a problem is divided into a sequence of different modules.
+
+One problem for OCR is that compares to pedestrian detection, the ratio between length and width for each block of words varies.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/OCR.png)
+So how we implement pedestrian detection?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/pd.png)
+We apply supervised learning and feed our examples into a neural network.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/swc.png)
+We use different size of rectangle and skin through the whole window to decide the number of pedestrian in the image. And that’s called sliding window classifier.
+
+### And how we implement text detection?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/imagedetection.png)
+Same as before, we have positive and negative examples.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/textdetection.png)
+First we use small scale rectangle. The shade of gray represents the probability the classifier thinks they are texts. But we haven’t done yet since what we want is to draw rectangle around texts.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/eo.png)
+So what we do is to put the image into an expansion operator. After that we need to do is to draw bounding boxes around white spaces. Also, we know that the width of the image should be much smaller than its height, so we also discard the thin, tall ones(we ignore one inside the circle).
+
+Remember that the second step is image segmentation. So how can we segment out individual characters in this image?
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/split.png)
+We again train another classifier. What we next to do is again a sliding window classifier. But we only required to do it in one dimension(there’s no different rows here) 
+
+## Artificial data synthesis: get huge training set
+1. Can take random font downloaded off the web and give it a random background image. With some blurring operators or affine distortions, you can get a synthetic training set.
+2. Take example that already have, amplify your training set. Automatically adding different distortions such as background sounds on your original data. 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/distortion.png)
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/distortion2.png)
+It is worth noticing that the distortion you add should be reasonable. 
+
+Notation about artificial data synthesis:
+1. Make sure you have a low bias classifier or high variance classifier before expanding the effort. Only then should you put effort to create large, artificial training set.
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/moredata.png)
+
+## Ceiling analysis:
+We have a number that estimate the overall performance of our algorithm.
+
+What ceiling analysis do is to, e.g. give the correct answer of text detection(100% accuracy), then estimate the overall accuracy of the entire system. Next we go to the next pipeline, given the correct segmentation. Given the accuracy again, we go to he next pipeline. 
+![Image text](https://github.com/robinhhu/AI-learning-note/blob/master/image/ceiling.png)
+We now understand what is the upside potential for improving each of these components
